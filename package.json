@@ -1,0 +1,11 @@
+{
+  "name": "@bmd-studio/genstack-container-vernemq",
+  "version": "1.0.0",
+  "description": "Off-the-shelf VerneMQ container.",
+  "author": "BMD Studio",
+  "license": "MIT",
+  "scripts": {
+    "dc": "docker-compose --env-file=./env/defaults -f docker-compose.yml --compatibility",
+    "dc:dev": "yarn dc -f docker-compose.development.yml"
+  }
+}

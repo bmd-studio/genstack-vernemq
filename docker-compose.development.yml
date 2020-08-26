@@ -1,0 +1,9 @@
+version: '3.7'
+
+services:
+  vernemq:
+    volumes:
+      - ./:${VERNEMQ_PLUGIN_PATH}:${DOCKER_VOLUME_BIND_FLAG}
+    ports:
+      - ${VERNEMQ_WS_PORT}   
+      - ${VERNEMQ_MQTT_PORT}        
