@@ -1,4 +1,5 @@
 {
+  "name": "@bmd-studio/genstack-container-vernemq",
   "private": true,
   "scripts": {
     "dc": "docker-compose --env-file=./env/defaults -f docker-compose.yml --compatibility",
