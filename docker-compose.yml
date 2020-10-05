@@ -37,7 +37,7 @@ services:
       
       - traefik.http.services.${APP_PREFIX}-${SERVICE_NAME}-http.loadbalancer.server.port=${VERNEMQ_WS_PORT}
 
-      - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-stripprefix.stripprefix.prefixes=/${SERVICE_NAME}
+      - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-stripprefix.stripprefix.prefixes=/${APP_PREFIX}/${SERVICE_NAME}
 
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-middlewares-path.chain.middlewares=${APP_PREFIX}-${SERVICE_NAME}-stripprefix
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-path 
