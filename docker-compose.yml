@@ -3,6 +3,7 @@ version: '3.7'
 services:
   vernemq:
     build:
+      container_name: ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME}
       context: ./
       args:
         - DOCKER_IMAGE
@@ -14,8 +15,12 @@ services:
     env_file:
       - ${DOCKER_GENERATED_ENV_FILE:-./env/defaults}    
     networks:
-      - backend
-      - frontend 
+      backend:
+        aliases: 
+          - ${SERVICE_NAME}
+      frontend:
+        aliases: 
+          - ${SERVICE_NAME} 
     deploy:
       resources:
         limits:
@@ -32,7 +37,7 @@ services:
       
       - traefik.http.services.${APP_PREFIX}-${SERVICE_NAME}-http.loadbalancer.server.port=${VERNEMQ_WS_PORT}
 
-      - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-stripprefix.stripprefix.prefixes=/${SERVICE_NAME}
+      - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-stripprefix.stripprefix.prefixes=/${APP_PREFIX}/${SERVICE_NAME}
 
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-middlewares-path.chain.middlewares=${APP_PREFIX}-${SERVICE_NAME}-stripprefix
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-path 
