@@ -2,8 +2,8 @@ version: '3.7'
 
 services:
   vernemq:
+    container_name: ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME}
     build:
-      container_name: ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME}
       context: ./
       args:
         - DOCKER_IMAGE
