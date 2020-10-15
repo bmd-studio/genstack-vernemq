@@ -38,6 +38,8 @@ POSTGRES_DATABASE_NAME=postgres
 POSTGRES_IDENTITY_ROLE_NAME=identity
 POSTGRES_IDENTITY_SECRET=password
 
+PROXY_ROUTER_DOMAIN=localhost
+
 # variables to run standalone
 APP_PREFIX=vernemq
 SERVICE_NAME=vernemq
