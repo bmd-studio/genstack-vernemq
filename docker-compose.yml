@@ -4,7 +4,7 @@ services:
   vernemq:
     container_name: ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME}_${GS_ENV}
     restart: ${DOCKER_RESTART_POLICY}
-    image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VERSION}-${GS_ENV}
+    image: ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_TAG}-${GS_ENV}
     build:
       context: ./
       args:
@@ -46,7 +46,7 @@ services:
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-middlewares-path.chain.middlewares=${APP_PREFIX}-${SERVICE_NAME}-stripprefix
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-path 
 
-      - traefik.tcp.routers.${APP_PREFIX}-${SERVICE_NAME}.rule=HostSNI(`${SERVICE_NAME}.${APP_PREFIX}.localhost`)
+      - traefik.tcp.routers.${APP_PREFIX}-${SERVICE_NAME}-tcp.rule=HostSNI(`${SERVICE_NAME}.${APP_PREFIX}.${PROXY_ROUTER_DOMAIN}`)
       - traefik.tcp.services.${APP_PREFIX}-${SERVICE_NAME}-tcp.loadbalancer.server.port=${VERNEMQ_MQTT_PORT}
 
 networks:
