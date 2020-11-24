@@ -27,7 +27,7 @@ POSTGRES_IDENTITY_ROLE_NAME=identity
 POSTGRES_IDENTITY_SECRET=password
 
 PROXY_ROUTER_ENABLE=true
-PROXY_ROUTER_DOMAIN=localhost
+PROXY_ROUTER_DOMAIN={domain:.+}
 
 # bind the listener to 0.0.0.0 to support
 # adding the container to multiple docker networks

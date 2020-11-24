@@ -44,7 +44,7 @@ services:
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-middlewares-status.chain.middlewares=${APP_PREFIX}-${SERVICE_NAME}-stripprefix-status
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-status.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-status
 
-      - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-host.rule=Host(`${SERVICE_NAME}.${APP_PREFIX}.${PROXY_ROUTER_DOMAIN}`)
+      - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-host.rule=HostRegexp(`${SERVICE_NAME}.${APP_PREFIX}.${PROXY_ROUTER_DOMAIN}`)
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.rule=PathPrefix(`/${APP_PREFIX}/${SERVICE_NAME}`)
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.service=${APP_PREFIX}-${SERVICE_NAME}-ws
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-host.service=${APP_PREFIX}-${SERVICE_NAME}-ws
