@@ -14,7 +14,9 @@ services:
     cap_drop: 
       - ALL
     env_file:
-      - ${DOCKER_GENERATED_ENV_FILE:-./env/defaults}    
+      - ${DOCKER_GENERATED_ENV_FILE:-./env/defaults}  
+    ports:
+      - ${VERNEMQ_MQTT_MAPPED_PORT}:${VERNEMQ_MQTT_PORT}      
     networks:
       backend:
         aliases: 
@@ -54,7 +56,7 @@ services:
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-middlewares-path.chain.middlewares=${APP_PREFIX}-${SERVICE_NAME}-stripprefix
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-path 
 
-      - traefik.tcp.routers.${APP_PREFIX}-${SERVICE_NAME}-tcp.rule=HostSNI(`${SERVICE_NAME}.${APP_PREFIX}.${PROXY_ROUTER_DOMAIN}`)
+      - traefik.tcp.routers.${APP_PREFIX}-${SERVICE_NAME}-tcp.rule=HostSNI(`*`)
       - traefik.tcp.services.${APP_PREFIX}-${SERVICE_NAME}-tcp.loadbalancer.server.port=${VERNEMQ_MQTT_PORT}
 
 networks:

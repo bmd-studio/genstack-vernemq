@@ -6,5 +6,4 @@ services:
       - ./:${VERNEMQ_PLUGIN_PATH}:${DOCKER_VOLUME_BIND_FLAG}
     ports:
       - ${VERNEMQ_WS_PORT}   
-      - ${VERNEMQ_MQTT_PORT}    
       - ${VERNEMQ_STATUS_PORT}    

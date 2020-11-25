@@ -4,5 +4,4 @@ services:
   vernemq:
     ports:
       - ${VERNEMQ_WS_PORT}   
-      - ${VERNEMQ_MQTT_PORT}    
       - ${VERNEMQ_STATUS_PORT}    
