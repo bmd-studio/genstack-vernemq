@@ -22,11 +22,11 @@ services:
       frontend:
         aliases: 
           - ${SERVICE_NAME} 
-    deploy:
-      resources:
-        limits:
-          cpus: '2'
-          memory: 500M       
+    # deploy:
+    #   resources:
+    #     limits:
+    #       cpus: '2'
+    #       memory: 500M       
     logging:
       driver: ${DOCKER_LOGGING_DRIVER}
       options:
