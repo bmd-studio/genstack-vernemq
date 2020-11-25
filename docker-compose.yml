@@ -56,8 +56,8 @@ services:
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-middlewares-path.chain.middlewares=${APP_PREFIX}-${SERVICE_NAME}-stripprefix
       - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-path 
 
-      - traefik.tcp.routers.${APP_PREFIX}-${SERVICE_NAME}-tcp.rule=HostSNI(`*`)
-      - traefik.tcp.services.${APP_PREFIX}-${SERVICE_NAME}-tcp.loadbalancer.server.port=${VERNEMQ_MQTT_PORT}
+      #- traefik.tcp.routers.${APP_PREFIX}-${SERVICE_NAME}-tcp.rule=HostSNI(`*`)
+      #- traefik.tcp.services.${APP_PREFIX}-${SERVICE_NAME}-tcp.loadbalancer.server.port=${VERNEMQ_MQTT_PORT}
 
 networks:
   backend:
