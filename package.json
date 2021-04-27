@@ -1,17 +1,26 @@
 {
   "name": "@bmd-studio/genstack-container-vernemq",
   "private": true,
-
   "scripts": {
     "setup": "yarn install",
     "start:docker": "yarn dc:dev up",
     "start:docker-prod": "yarn dc up",
     "build:docker": "yarn dc:dev build",
     "build:docker-prod": "yarn dc build",
+    "test": "yarn test:integration",
+    "test:integration": "jest --testPathPattern=integration/",
     "dc": "docker-compose --env-file=./env/defaults -f docker-compose.yml -f docker-compose.standalone.yml --compatibility",
     "dc:dev": "cross-env GS_ENV=development yarn dc -f docker-compose.development.yml"
   },
   "devDependencies": {
-    "cross-env": "^7.0.2"
+    "@types/jest": "26.0.22",
+    "@types/lodash": "^4.14.168",
+    "cross-env": "7.0.3",
+    "jest": "26.6.3",
+    "lodash": "4.17.21",
+    "mqtt": "4.2.6",
+    "testcontainers": "7.8.0",
+    "ts-jest": "26.5.5",
+    "typescript": "4.2.4"
   }
 }
