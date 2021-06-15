@@ -11,12 +11,12 @@ require "plugins/src/utilities/postgres"
 
 -- constants
 MQTT_TOPIC_DELIMITER_PATTERN = "([^/]+)"
-APP_PREFIX = os.getenv("APP_PREFIX")
+APP_PREFIX = os.getenv("APP_PREFIX") or "project"
 MQTT_DATABASE_CHANNEL_PREFIX = os.getenv("MQTT_DATABASE_CHANNEL_PREFIX") or "pg"
 DATABASE_ID_COLUMN_NAME = os.getenv("DATABASE_ID_COLUMN_NAME") or "id"
 AUTH_AUTO_ADMIN_FALLBACK = (os.getenv("AUTH_AUTO_ADMIN_FALLBACK") or false) == "true"
-MQTT_ADMIN_USERNAME = os.getenv("MQTT_ADMIN_USERNAME")
-MQTT_ADMIN_SECRET = os.getenv("MQTT_ADMIN_SECRET")
+MQTT_ADMIN_USERNAME = os.getenv("MQTT_ADMIN_USERNAME") or "admin"
+MQTT_ADMIN_SECRET = os.getenv("MQTT_ADMIN_SECRET") or "password"
 
 -- Hook to handle new client registrations.
 -- The JWT token should be in the username field, this field supports a max length of 655535 bytes after encoding (UTF-8 encoded).
@@ -33,7 +33,7 @@ function auth_on_register(reg)
   if is_admin_login(username, password) == true then
     return true
   end
-  
+
   jwt_is_valid = verify_jwt(jwt)
 
   -- guard: check if the JWT is valid
@@ -219,11 +219,11 @@ function is_admin_login(username, password)
   if username == MQTT_ADMIN_USERNAME and password == MQTT_ADMIN_SECRET then
     return true
   end
-  
+
   -- guard: check for admin fallback
   if has_admin_fallback(username) == true then
     return true
-  end  
+  end
 
   return false
 end
