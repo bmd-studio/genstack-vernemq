@@ -8,7 +8,7 @@ const WS_INTERNAL_PORT = 8080;
 const VERNEMQ_DOCKER_IMAGE = 'ghcr.io/bmd-studio/genstack-vernemq:latest';
 
 const MQTT_ADMIN_USERNAME = 'admin';
-const MQTT_ADMIN_PASSWORD = 'password';
+const MQTT_ADMIN_SECRET = 'password';
 
 let network: StartedNetwork;
 let vernemqContainer: StartedTestContainer; 
@@ -21,7 +21,7 @@ const setupTestContainer = async(): Promise<void> => {
     .withNetworkMode(network.getName())
     .withExposedPorts(MQTT_INTERNAL_PORT, WS_INTERNAL_PORT)
     .withEnv('MQTT_ADMIN_USERNAME', MQTT_ADMIN_USERNAME)
-    .withEnv('MQTT_ADMIN_PASSWORD', MQTT_ADMIN_PASSWORD)
+    .withEnv('MQTT_ADMIN_SECRET', MQTT_ADMIN_SECRET)
     .withEnv('DOCKER_VERNEMQ_ALLOW_ANONYMOUS', 'on')
     .withEnv('DOCKER_VERNEMQ_ACCEPT_EULA', 'yes')
     .start();
@@ -44,7 +44,7 @@ export const getMqttClient = async(): Promise<mqtt.Client> => {
   const client = mqtt.connect(url, {
     port: parseInt(VERNEMQ_MQTT_PORT),
     username: MQTT_ADMIN_USERNAME,
-    password: MQTT_ADMIN_PASSWORD,
+    password: MQTT_ADMIN_SECRET,
   });
 
   return new Promise((resolve, reject) => {
