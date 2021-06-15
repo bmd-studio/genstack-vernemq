@@ -11,6 +11,7 @@ Dockerfile
 Dockerfile-dev
 Dockerfile-prod
 docker-compose.yml
+docker-compose.*.yml
 
 # Environment variable files
 env.*
@@ -21,5 +22,11 @@ env.*
 # To prevent storing dev/temporary container data
 /tmp/*
 
+# Node
+node_modules
+package.json
+*.lock
+jest.config.js
+
 # Tests
-/src/__tests__
+/src/__tests__/*
