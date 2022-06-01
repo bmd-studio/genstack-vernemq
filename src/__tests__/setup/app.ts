@@ -1,17 +1,17 @@
-import { assignIn, reject } from 'lodash';
-import { GenericContainer, Network, StartedNetwork, StartedTestContainer, Wait } from 'testcontainers';
+import { assignIn } from 'lodash';
+import { GenericContainer, Network, StartedNetwork, StartedTestContainer } from 'testcontainers';
 import * as mqtt from 'mqtt';
 
 const MQTT_INTERNAL_PORT = 1883;
 const WS_INTERNAL_PORT = 8080;
 
-const VERNEMQ_DOCKER_IMAGE = 'ghcr.io/bmd-studio/genstack-vernemq:latest';
+const VERNEMQ_DOCKER_IMAGE = 'project/vernemq:1.0.0-development';
 
 const MQTT_ADMIN_USERNAME = 'admin';
 const MQTT_ADMIN_SECRET = 'password';
 
 let network: StartedNetwork;
-let vernemqContainer: StartedTestContainer; 
+let vernemqContainer: StartedTestContainer;
 
 const setupTestContainer = async(): Promise<void> => {
   network = await new Network()
