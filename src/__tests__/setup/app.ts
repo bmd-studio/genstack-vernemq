@@ -5,7 +5,7 @@ import * as mqtt from 'mqtt';
 const MQTT_INTERNAL_PORT = 1883;
 const WS_INTERNAL_PORT = 8080;
 
-const VERNEMQ_DOCKER_IMAGE = 'project/vernemq:1.0.0-development';
+const VERNEMQ_DOCKER_IMAGE = 'ghcr.io/bmd-studio/genstack-vernemq:latest';
 
 const MQTT_ADMIN_USERNAME = 'admin';
 const MQTT_ADMIN_SECRET = 'password';
@@ -39,7 +39,7 @@ const setupEnv = async (): Promise<void> => {
 };
 
 export const getMqttClient = async(): Promise<mqtt.Client> => {
-  const { VERNEMQ_MQTT_PORT } = process.env;
+  const { VERNEMQ_MQTT_PORT = String(MQTT_INTERNAL_PORT) } = process.env;
   const url = `mqtt://localhost`;
   const client = mqtt.connect(url, {
     port: parseInt(VERNEMQ_MQTT_PORT),
