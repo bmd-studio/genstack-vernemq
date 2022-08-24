@@ -1,6 +1,6 @@
 {
   "name": "@bmd-studio/genstack-vernemq",
-  "version": "1.11.0.4",
+  "version": "1.11.4",
   "scripts": {
     "setup": "yarn install",
     "start:docker": "yarn dc:dev up",
