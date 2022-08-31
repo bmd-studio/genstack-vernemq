@@ -2,33 +2,33 @@ version: '3.7'
 
 services:
   vernemq:
-    container_name: ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME}_${GS_ENV}
+    container_name: ${COMPOSE_PROJECT_NAME}_${SERVICE_NAME}
     restart: ${DOCKER_RESTART_POLICY}
-    image: ${DOCKER_IMAGE_REGISTRY:-}${APP_PREFIX}/${SERVICE_NAME}:${APP_VERSION}-${GS_ENV}
+    image: ${DOCKER_IMAGE_REGISTRY:-}${APP_PREFIX}/${SERVICE_NAME}:${APP_VERSION}
     build:
       context: ./
       args:
         - DOCKER_BASE_IMAGE
         - VERNEMQ_PLUGIN_PATH
     init: true
-    cap_drop: 
+    cap_drop:
       - ALL
     env_file:
-      - ${DOCKER_GENERATED_ENV_FILE:-./env/defaults}  
+      - ${DOCKER_GENERATED_ENV_FILE:-./env/defaults}
     ports:
-      - ${VERNEMQ_MQTT_MAPPED_PORT}:${VERNEMQ_MQTT_PORT}      
+      - ${VERNEMQ_MQTT_MAPPED_PORT}:${VERNEMQ_MQTT_PORT}
     networks:
       backend:
-        aliases: 
+        aliases:
           - ${SERVICE_NAME}
       frontend:
-        aliases: 
-          - ${SERVICE_NAME} 
+        aliases:
+          - ${SERVICE_NAME}
     # deploy:
     #   resources:
     #     limits:
     #       cpus: '2'
-    #       memory: 500M       
+    #       memory: 500M
     logging:
       driver: ${DOCKER_LOGGING_DRIVER}
       options:
@@ -54,7 +54,7 @@ services:
 
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-stripprefix.stripprefix.prefixes=/${APP_PREFIX}/${SERVICE_NAME}
       - traefik.http.middlewares.${APP_PREFIX}-${SERVICE_NAME}-middlewares-path.chain.middlewares=${APP_PREFIX}-${SERVICE_NAME}-stripprefix
-      - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-path 
+      - traefik.http.routers.${APP_PREFIX}-${SERVICE_NAME}-path.middlewares=${APP_PREFIX}-${SERVICE_NAME}-middlewares-path
 
       #- traefik.tcp.routers.${APP_PREFIX}-${SERVICE_NAME}-tcp.rule=HostSNI(`*`)
       #- traefik.tcp.services.${APP_PREFIX}-${SERVICE_NAME}-tcp.loadbalancer.server.port=${VERNEMQ_MQTT_PORT}
@@ -64,5 +64,5 @@ networks:
     name: ${APP_PREFIX}_${DOCKER_BACKEND_NETWORK_NAME}
     external: true
   frontend:
-    name: ${DOCKER_FRONTEND_NETWORK_NAME}   
-    external: true       
+    name: ${DOCKER_FRONTEND_NETWORK_NAME}
+    external: true

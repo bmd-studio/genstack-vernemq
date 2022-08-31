@@ -10,7 +10,7 @@
     "test": "yarn test:integration",
     "test:integration": "jest --testPathPattern=integration/",
     "dc": "docker-compose --env-file=./env/defaults -f docker-compose.yml -f docker-compose.standalone.yml --compatibility",
-    "dc:dev": "cross-env GS_ENV=development yarn dc -f docker-compose.development.yml"
+    "dc:dev": "yarn dc -f docker-compose.development.yml"
   },
   "devDependencies": {
     "@types/jest": "26.0.22",
